@@ -24,6 +24,9 @@ typedef struct {
     int meta;
     int ctrl;
     int shift;
+    int lastidx;
+    int hidden;
+    KeySym lasttwo[2];
 
     // disp is the X11 display that events are recorded from.
     Display *disp;

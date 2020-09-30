@@ -25,6 +25,18 @@ die(const char *msg)
     exit(1);
 }
 
+int
+double_shift(record_state *s)
+{
+    if ((s->lasttwo[0] == XK_Shift_L || s->lasttwo[0] == XK_Shift_R) &&
+	(s->lasttwo[1] == XK_Shift_L || s->lasttwo[1] == XK_Shift_R)) {
+	s->lasttwo[0] = 0;
+	s->lasttwo[1] = 0;
+	return 1;
+    }
+    return 0;
+}
+
 // process_modifiers writes val into s->meta, s->ctrl and s->shift depending
 // on whether the KeySym points to an Alt, Control or Shift key respectively.
 //
@@ -32,6 +44,10 @@ die(const char *msg)
 int
 process_modifiers(record_state *s, KeySym ks, int val)
 {
+    if (val == 0) {
+	s->lasttwo[s->lastidx] = ks;
+	s->lastidx = !s->lastidx;
+    }
     switch(ks) {
     case XK_Shift_L: case XK_Shift_R:
 	s->shift = val;
@@ -178,6 +194,11 @@ record_callback(XPointer priv, XRecordInterceptData *data)
 	    // Not currently displayed. Start from scratch.
 	    clear_stack(s->stack);
 	}
+
+	if (s->hidden) {
+	    // Currently hiding. Don't store keystrokes.
+	    break;
+	}
 	
 	// The non-modifier part of a combo has been pressed. Report that.
 	const char *ksname = XKeysymToString(ks); /* TBD: Might have to handle no symbol keys */
@@ -190,6 +211,15 @@ record_callback(XPointer priv, XRecordInterceptData *data)
     {
 	KeySym ks = XKeycodeToKeysym(s->disp, event->u.u.detail, 0);
 	process_modifiers(s, ks, 0);
+	if (double_shift(s)) {
+	    s->hidden = !s->hidden;
+	    if (s->hidden)
+		push(s->stack, strdup("---"));
+	    else {
+		push(s->stack, strdup("+++"));
+	    }
+	    display_keystrokes(s->osd, s->stack);
+	}
 	break;
     }
     }
@@ -223,6 +253,9 @@ main(void)
       .shift = 0,
       .meta = 0,
       .ctrl = 0,
+      .hidden = 0,
+      .lastidx = 0,
+      .lasttwo = {0, 0},
       .disp = d0,
       .osd = osd,
       .stack = keystack,

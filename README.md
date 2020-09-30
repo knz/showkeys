@@ -30,6 +30,9 @@ https://github.com/nibrahim/showkeys by Noufal Ibrahim.
 
 It implements the following changes:
 
+- it hides the OSD output upon double press on the Shift key, and
+  un-hides it upon another double Shift press. (Useful for typing passwords.)
+
 - it uses the actual representation of keyboard symbols, so that
   e.g. "comma" is printed as ",".
 
