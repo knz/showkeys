@@ -20,6 +20,8 @@ has more features than showkeys. The advantages of showkeys are
 The list of things which key-mon does better than showkeys is far
 longer but I wanted something that fixed these specific issues.
 
+![screenshot](screenshot.png)
+
 Changes from the original version
 ---------------------------------
 
