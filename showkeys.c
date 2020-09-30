@@ -1,5 +1,6 @@
-/* Showkeys 
+/* Showkeys
    Copyright Noufal Ibrahim <noufal@nibrahim.net.in> 2011
+   Copyright Raphael Poss <knz@thaumogen.net> 2020
 
    Licensed under the GPLv3 : http://www.gnu.org/licenses/gpl.txt
 
