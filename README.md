@@ -45,7 +45,7 @@ It implements the following changes:
 Requirements
 ------------
 
-You will need
+You will need:
 
 1. The Xlib development libraries. (available as `libx11-dev` on Debian).
 2. The libxosd development libraries (available as `libxosd-dev` on Debian).

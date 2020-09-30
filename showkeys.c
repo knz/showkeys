@@ -84,6 +84,7 @@ create_emacs_keyname(record_state *s, const char *keyname)
 	      keyname = punct + (keyname[0] - '0') * 2;
 	  else if ('a' <= keyname[0] && keyname[0] <= 'z')
 	      keyname = alph + (keyname[0] - 'a') * 2;
+	  else if (keyname[0] == ';') keyname = (":");
 	  else if (keyname[0] == '-') keyname = ("_");
 	  else if (keyname[0] == '=') keyname = ("+");
 	  else if (keyname[0] == '[') keyname = ("{");
