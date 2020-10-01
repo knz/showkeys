@@ -11,7 +11,8 @@
 #define OSDLEN 15
 
 /* Display font, select a font using 'xfontsel -scaled' */
-#define SK_FONT     "-*-latin modern sans-*-r-*-*-60-*-*-*-*-*-*-*"
+#define SK_FONT     "-*-courier-*-r-*-*-60-*-*-*-*-*-*-*"
+// #define SK_FONT     "-*-latin modern sans-*-r-*-*-60-*-*-*-*-*-*-*"
 
 /* Display position, possible values: XOSD_top, XOSD_bottom */
 #define SK_POS      XOSD_bottom
